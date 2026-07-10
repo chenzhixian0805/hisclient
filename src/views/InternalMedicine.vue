@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="link">医院科室>内科类</div>
+    <div class="link">医院科室> 内科类</div>
     <el-divider />
     <div class="info">
       <h3>内科类科室列表</h3>
