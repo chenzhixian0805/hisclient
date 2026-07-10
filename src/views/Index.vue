@@ -74,7 +74,7 @@
             <el-sub-menu index="4">
               <template #title>
                 <el-icon><House /></el-icon>
-                <span>科室设置</span>
+                <span>医院科室</span>
               </template>
               <el-menu-item index="/home/internalmedicine">内科</el-menu-item>
               <el-menu-item index="/home/surgery">外科</el-menu-item>
