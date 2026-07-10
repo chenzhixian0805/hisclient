@@ -6,7 +6,7 @@
         <div class="header-left">
           <!-- 汉堡菜单按钮 -->
           <el-icon class="hamburger-btn" @click="toggleSidebar">
-            <Fold v-if="!isMobile || sidebarVisible" />
+            <Fold v-if="sidebarVisible" />
             <Expand v-else />
           </el-icon>
           <h4 class="text-icon">
@@ -41,63 +41,8 @@
         </div>
       </el-header>
       <el-container class="wrapper-main">
-        <!-- PC端侧边栏 -->
-        <el-aside v-if="!isMobile" width="200px" class="aside">
-          <el-menu
-            active-text-color="#ffd04b"
-            background-color="#545c64"
-            class="el-menu-vertical-demo"
-            default-active="2"
-            text-color="#fff"
-            unique-opened="true"
-            router="true"
-          >
-            <el-sub-menu index="1">
-              <template #title>
-                <el-icon><HelpFilled /></el-icon>
-                <span>挂号收费</span>
-              </template>
-              <el-menu-item index="/home/onsiteRegistration">窗口挂号</el-menu-item>
-              <el-menu-item index="/home/registrationRecord">窗口退号</el-menu-item>
-            </el-sub-menu>
-            <el-sub-menu index="2">
-              <template #title>
-                <el-icon><Avatar /></el-icon>
-                <span>门诊医生</span>
-              </template>
-              <el-menu-item index="/home/patientview">患者查看</el-menu-item>
-              <el-menu-item index="/home/medicalrecord">医生诊疗:病历首页</el-menu-item>
-              <el-menu-item index="/home/prescribemedicine">医生诊疗:开设处方</el-menu-item>
-            </el-sub-menu>
-            <el-sub-menu index="3">
-              <template #title>
-                <el-icon><FirstAidKit /></el-icon>
-                <span>药房管理</span>
-              </template>
-              <el-menu-item index="/home/pharmacydispensing">药房发药</el-menu-item>
-              <el-menu-item index="/home/pharmacyinventory">药房库存</el-menu-item>
-            </el-sub-menu>
-            <el-sub-menu index="4">
-              <template #title>
-                <el-icon><House /></el-icon>
-                <span>医院科室</span>
-              </template>
-              <el-menu-item index="/home/internalmedicine">内科</el-menu-item>
-              <el-menu-item index="/home/surgery">外科</el-menu-item>
-            </el-sub-menu>
-            <el-sub-menu index="5">
-              <template #title>
-                <el-icon><UserFilled /></el-icon>
-                <span>人员管理</span>
-              </template>
-              <el-menu-item index="/home/person">医院职员</el-menu-item>
-            </el-sub-menu>
-          </el-menu>
-        </el-aside>
-
-        <!-- 移动端抽屉侧边栏 -->
+        <!-- 抽屉侧边栏（所有屏幕尺寸共用） -->
         <el-drawer
-          v-if="isMobile"
           v-model="sidebarVisible"
           direction="ltr"
           size="200px"
@@ -189,9 +134,7 @@ export default {
       }
     },
     toggleSidebar() {
-      if (this.isMobile) {
-        this.sidebarVisible = !this.sidebarVisible;
-      }
+      this.sidebarVisible = !this.sidebarVisible;
     },
     onMenuSelect() {
       // 移动端点击菜单项后自动关闭抽屉
@@ -233,7 +176,7 @@ export default {
   font-size: 20px;
   cursor: pointer;
   color: white;
-  display: none;
+  display: flex;
 }
 
 .wrapper .wrapper-header .header-right {
@@ -261,21 +204,13 @@ export default {
 }
 
 /*************** 响应式适配 ****************/
-/* 平板及以下：显示汉堡按钮 */
+/* 平板及以下：隐藏非必要信息 */
 @media screen and (max-width: 768px) {
-  .hamburger-btn {
-    display: flex;
-  }
-
   .wrapper .wrapper-header .header-left .text {
     display: none;
   }
 
   .wrapper .wrapper-header .header-right .user-name {
-    display: none;
-  }
-
-  .wrapper .wrapper-main .aside {
     display: none;
   }
 
