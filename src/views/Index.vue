@@ -144,6 +144,7 @@ export default {};
   margin-left: 15px;
   margin-right: 15px;
 }
+
 /*************** main样式 ****************/
 .wrapper .wrapper-main .aside {
   height: 800px;
