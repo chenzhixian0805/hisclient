@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="link">人员管理>医院职员</div>
+    <div class="link">人员管理> 医院职员</div>
     <el-divider />
     <div class="info">
       <h3>医生列表：</h3>
