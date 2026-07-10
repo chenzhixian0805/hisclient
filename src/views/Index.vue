@@ -150,5 +150,4 @@ export default {};
   height: 800px;
   background: #545c64;
 }
-
 </style>
