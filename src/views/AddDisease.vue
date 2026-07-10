@@ -57,7 +57,6 @@ export default {
   }
 };
 </script>
-      
       <style scoped>
 .add-disease {
   padding: 20px;

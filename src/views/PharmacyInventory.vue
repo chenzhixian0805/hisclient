@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="link">药房管理>药房库存</div>
+    <div class="link">药房管理> 药房库存</div>
     <el-divider />
     <div class="header">
       <el-row style="margin-left: 30px">

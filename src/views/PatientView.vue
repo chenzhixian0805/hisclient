@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="link">门诊医生>患者查看</div>
+    <div class="link">门诊医生> 患者查看</div>
     <el-divider />
     <div class="header">
       <el-row style="margin-left: 30px">

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="link">门诊医生>开设处方</div>
+    <div class="link">门诊医生> 开设处方</div>
     <el-divider />
     <div v-if="!showPreviousPage" class="info">
       <h3>处方药:XXX元</h3>

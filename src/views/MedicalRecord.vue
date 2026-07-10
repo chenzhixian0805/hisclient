@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="link">门诊医生>病历首页</div>
+    <div class="link">门诊医生> 病历首页</div>
     <el-divider />
     <div v-if="!showAddDiseasePage" class="info">
       <h3>患者病历：</h3>

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="link">挂号收费>窗口挂号</div>
+    <div class="link">挂号收费> 窗口挂号</div>
     <el-divider />
     <div class="header">
       <el-button type="primary" style="margin-left: 30px;">挂号</el-button>

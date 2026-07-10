@@ -1,6 +1,6 @@
 <template>
   <div class="add-medicine">
-    <div class="title"><h3>增加药品:</h3></div>
+    <div class="title"><h3>增加药品: </h3></div>
     <div class="header">
       <el-row style="margin-left: 30px">
         <el-col :span="6">
