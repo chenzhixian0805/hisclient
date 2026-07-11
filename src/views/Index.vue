@@ -289,20 +289,22 @@ export default {
 .collapse-btn {
   cursor: pointer;
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  background-color: rgba(77, 182, 172, 0.15);
-  border: 1px solid #4db6ac;
+  border-radius: 8px;
+  background-color: #ffffff;
+  border: none;
   transition: all 0.2s;
   padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .collapse-btn:hover {
   background-color: #4db6ac;
+  box-shadow: 0 2px 12px rgba(77, 182, 172, 0.5);
 }
 
 .collapse-btn:hover .bar {
@@ -312,16 +314,16 @@ export default {
 .hamburger-icon {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   align-items: center;
   justify-content: center;
 }
 
 .bar {
-  width: 18px;
-  height: 2px;
-  background-color: #4db6ac;
-  border-radius: 1px;
+  width: 20px;
+  height: 3px;
+  background-color: #1d2b3a;
+  border-radius: 2px;
   transition: all 0.2s;
 }
 
