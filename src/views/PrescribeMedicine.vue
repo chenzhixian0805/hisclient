@@ -1,44 +1,42 @@
 <template>
-  <div class="wrapper">
-    <div class="link">门诊医生> 开设处方</div>
-    <el-divider />
-    <div v-if="!showPreviousPage" class="info">
-      <h3>处方药:XXX元</h3>
-      <el-table :data="userList" style="width: 100%; margin-top: 20px" stripe border>
-        <el-table-column type="selection" width="55" />
-        <el-table-column prop="name" label="药品名称" width="200" align="center" />
-        <el-table-column prop="specification" label="药品规格" width="200" align="center" />
-        <el-table-column prop="price" label="单价" width="150" align="center" />
-        <el-table-column label="用法用量" width="300" align="center">
-          <el-input v-model="inputtest" placeholder="请输入" clearable />
-        </el-table-column>
-        <el-table-column label="数量" width="250" align="center">
-          <el-input-number
-            v-model="num"
-            class="mx-4"
-            :min="1"
-            :max="10"
-            controls-position="right"
-            @change="handleChange"
-          />
-        </el-table-column>
-        <el-table-column label="操作" width="290" align="center">
-          <template v-slot="scope">
-            <el-button type="primary" size="small" @click="handleAdd">增加</el-button>
-            <el-button type="danger" size="small" @click="removeRow(scope.$index)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <div class="dialog-footer" style="padding-top: 10px">
-        <el-button type="primary" plain>开立处方</el-button>
-        <el-button type="primary" plain>重置处方</el-button>
+  <div class="page-wrapper">
+    <div class="page-breadcrumb">门诊医生 > 开设处方</div>
+    <div v-if="!showPreviousPage">
+      <div class="page-header">
+        <h3 class="page-title">处方药</h3>
+      </div>
+      <div class="el-table-wrapper">
+        <el-table :data="userList" style="width: 100%" stripe border>
+          <el-table-column type="selection" width="55" />
+          <el-table-column prop="name" label="药品名称" min-width="150" align="center" />
+          <el-table-column prop="specification" label="药品规格" min-width="150" align="center" />
+          <el-table-column prop="price" label="单价" width="100" align="center" />
+          <el-table-column label="用法用量" min-width="200" align="center">
+            <template #default>
+              <el-input v-model="inputtest" placeholder="请输入" clearable />
+            </template>
+          </el-table-column>
+          <el-table-column label="数量" width="180" align="center">
+            <template #default>
+              <el-input-number v-model="num" :min="1" :max="10" controls-position="right" />
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" width="180" align="center" fixed="right">
+            <template #default="scope">
+              <el-button type="primary" size="small" @click="handleAdd">增加</el-button>
+              <el-button type="danger" size="small" @click="removeRow(scope.$index)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="page-actions" style="margin-top: 15px;">
+        <el-button type="primary">开立处方</el-button>
+        <el-button type="info" plain>重置处方</el-button>
       </div>
     </div>
     <router-view v-show="showPreviousPage" />
   </div>
 </template>
-
-
 
 <script>
 import { useRouter } from 'vue-router';
@@ -73,11 +71,9 @@ export default {
     const inputtest = ref("");
     const showPreviousPage = ref(false);
 
-    
     const handleAdd = () => {
-      console.log("Navigating to Add Disease page...");
-      showPreviousPage.value = true; 
-      router.push({ name: 'AddMedicine' }); 
+      showPreviousPage.value = true;
+      router.push({ name: 'AddMedicine' });
     };
 
     const removeRow = (index) => {
@@ -86,6 +82,8 @@ export default {
 
     return {
       userList,
+      num,
+      inputtest,
       handleAdd,
       removeRow,
       showPreviousPage,
@@ -95,23 +93,4 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-  width: 100%;
-  height: 100%;
-}
-.wrapper .link {
-  height: 40px;
-  line-height: 50px;
-  padding-left: 20px;
-  font-size: 18px;
-}
-.wrapper .info {
-  margin-left: 30px;
-}
-.wrapper .dialog-footer {
-  background-color: #ecf5ff;
-  margin-top: 10px;
-  padding-top: 10px;
-  height: 40px;
-}
 </style>

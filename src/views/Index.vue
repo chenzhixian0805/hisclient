@@ -42,10 +42,9 @@
         <el-drawer
           v-model="sidebarVisible"
           direction="ltr"
-          size="200px"
+          size="220px"
           :with-header="false"
           :show-close="false"
-          :modal-append-to-body="false"
           :close-on-click-modal="true"
         >
           <div class="drawer-header">
@@ -55,11 +54,11 @@
             <span class="drawer-title">东软云医院</span>
           </div>
           <el-menu
-            active-text-color="#ffd04b"
-            background-color="#2f4050"
+            active-text-color="#ffffff"
+            background-color="#1d2b3a"
             class="sidebar-menu"
             default-active="2"
-            text-color="#a7b1c2"
+            text-color="#a3b1bf"
             unique-opened="true"
             router="true"
             @select="onMenuSelect"
@@ -149,14 +148,14 @@ export default {
 }
 
 .wrapper-header {
-  background: linear-gradient(135deg, #545c64 0%, #6b737d 100%);
+  background: linear-gradient(135deg, #1d2b3a 0%, #2d4356 100%);
   height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
   color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   z-index: 100;
 }
 
@@ -171,12 +170,12 @@ export default {
   cursor: pointer;
   color: white;
   padding: 8px;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: background-color 0.2s;
 }
 
 .hamburger-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 .logo-wrapper {
@@ -187,7 +186,7 @@ export default {
 
 .logo-icon {
   font-size: 24px;
-  color: #ffd04b;
+  color: #4db6ac;
 }
 
 .logo-text {
@@ -199,8 +198,8 @@ export default {
 
 .version {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
-  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.08);
   padding: 2px 8px;
   border-radius: 10px;
 }
@@ -213,7 +212,7 @@ export default {
 
 .user-name {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .user-dropdown {
@@ -227,12 +226,12 @@ export default {
 }
 
 .user-dropdown:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 .user-icon {
   font-size: 18px;
-  color: #ffd04b;
+  color: #4db6ac;
 }
 
 .user-name-text {
@@ -242,7 +241,7 @@ export default {
 
 .arrow-icon {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .wrapper-main {
@@ -255,13 +254,14 @@ export default {
   align-items: center;
   gap: 10px;
   padding: 20px 20px 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 10px;
+  background-color: #1d2b3a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 0;
 }
 
 .drawer-logo {
   font-size: 28px;
-  color: #ffd04b;
+  color: #4db6ac;
 }
 
 .drawer-title {
@@ -275,8 +275,21 @@ export default {
   min-height: calc(100% - 70px);
 }
 
+.sidebar-menu :deep(.el-menu-item.is-active) {
+  background-color: #2d4356 !important;
+  color: #ffffff !important;
+}
+
+.sidebar-menu :deep(.el-menu-item:hover) {
+  background-color: #2d4356 !important;
+}
+
+.sidebar-menu :deep(.el-sub-menu__title:hover) {
+  background-color: #2d4356 !important;
+}
+
 .main-content {
-  background-color: #f5f6fa;
+  background-color: #f0f2f5;
   padding: 20px;
   overflow-y: auto;
 }
@@ -284,12 +297,6 @@ export default {
 .content-wrapper {
   max-width: 1400px;
   margin: 0 auto;
-}
-
-@media screen and (max-width: 1024px) {
-  .content-wrapper {
-    padding: 0;
-  }
 }
 
 @media screen and (max-width: 768px) {

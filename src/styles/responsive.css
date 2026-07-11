@@ -1,32 +1,33 @@
 .page-wrapper {
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  padding: 20px 24px;
   margin-bottom: 20px;
 }
 
 .page-breadcrumb {
-  font-size: 14px;
-  color: #606266;
-  padding: 10px 20px;
-  margin-bottom: 15px;
+  font-size: 13px;
+  color: #8c8c8c;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .page-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #ebeef5;
+  margin-bottom: 16px;
 }
 
 .page-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  color: #303133;
+  color: #1d2b3a;
   margin: 0;
+  padding-left: 10px;
+  border-left: 3px solid #4db6ac;
 }
 
 .page-actions {
@@ -36,86 +37,109 @@
 
 .el-table-wrapper {
   overflow-x: auto;
-  border-radius: 8px;
+  border-radius: 6px;
+  border: 1px solid #ebeef5;
 }
 
-.el-table {
+.el-table-wrapper .el-table {
   min-width: 800px;
+}
+
+.el-table-wrapper .el-table th {
+  background-color: #fafbfc !important;
+  color: #1d2b3a !important;
+  font-weight: 600;
 }
 
 .el-form--inline .el-form-item {
   margin-right: 15px;
+  margin-bottom: 15px;
 }
 
 .el-pagination {
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.el-button--primary {
+  --el-button-bg-color: #2d4356;
+  --el-button-border-color: #2d4356;
+  --el-button-hover-bg-color: #3d5366;
+  --el-button-hover-border-color: #3d5366;
+  --el-button-active-bg-color: #1d2b3a;
+  --el-button-active-border-color: #1d2b3a;
 }
 
 @media screen and (max-width: 1024px) {
   .page-wrapper {
-    padding: 15px;
+    padding: 16px;
   }
-  
-  .el-table {
+
+  .el-table-wrapper .el-table {
     min-width: 600px;
   }
 }
 
 @media screen and (max-width: 768px) {
   .page-wrapper {
-    padding: 12px;
+    padding: 14px;
     border-radius: 6px;
     margin-bottom: 12px;
   }
-  
+
+  .page-breadcrumb {
+    font-size: 12px;
+  }
+
   .page-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
-  
+
   .page-actions {
     width: 100%;
     flex-wrap: wrap;
   }
-  
+
   .page-actions .el-button {
     flex: 1;
     min-width: 100px;
   }
-  
+
   .el-form--inline {
+    display: flex;
     flex-direction: column;
   }
-  
+
   .el-form--inline .el-form-item {
     width: 100%;
     margin-right: 0;
     margin-bottom: 10px;
   }
-  
+
   .el-form--inline .el-form-item .el-input,
   .el-form--inline .el-form-item .el-select,
-  .el-form--inline .el-form-item .el-date-picker {
+  .el-form--inline .el-form-item .el-date-editor {
     width: 100% !important;
   }
-  
-  .el-table {
+
+  .el-table-wrapper .el-table {
     min-width: 500px;
     font-size: 12px;
   }
-  
+
   .el-table .el-table__cell {
     padding: 8px 4px;
   }
-  
+
   .el-pagination {
     flex-wrap: wrap;
+    justify-content: center;
     gap: 5px;
   }
-  
+
   .el-pagination .btn-prev,
   .el-pagination .btn-next,
   .el-pagination .el-pager li {
@@ -128,33 +152,34 @@
 
 @media screen and (max-width: 480px) {
   .page-wrapper {
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 10px;
   }
-  
+
   .page-breadcrumb {
-    font-size: 12px;
-    padding: 8px 10px;
+    font-size: 11px;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
   }
-  
+
   .page-title {
-    font-size: 16px;
+    font-size: 14px;
   }
-  
-  .el-table {
+
+  .el-table-wrapper .el-table {
     min-width: 400px;
     font-size: 11px;
   }
-  
+
   .el-table .el-table__cell {
     padding: 6px 3px;
   }
-  
+
   .el-table .el-button--small {
     padding: 3px 6px;
     font-size: 10px;
   }
-  
+
   .el-dialog {
     width: 90% !important;
     margin: 0 5%;

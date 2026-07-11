@@ -1,51 +1,52 @@
 <template>
-  <div class="wrapper">
-    <div class="link">挂号收费> 窗口退号</div>
-    <el-divider />
-    <div class="header">
-      <el-row style="margin-left: 30px">
-        <el-col :span="6">
-          <el-input v-model="no" style="width: 240px" placeholder="请输入病历号" clearable />
+  <div class="page-wrapper">
+    <div class="page-breadcrumb">挂号收费 > 窗口退号</div>
+    <div class="page-header">
+      <el-row :gutter="15" style="width: 100%;">
+        <el-col :span="8">
+          <el-input v-model="no" placeholder="请输入病历号" clearable />
         </el-col>
-        <el-col :span="6">
-          <el-input v-model="username" style="width: 240px" placeholder="请输入姓名" clearable />
+        <el-col :span="8">
+          <el-input v-model="username" placeholder="请输入姓名" clearable />
         </el-col>
-        <el-col :span="6">
+        <el-col :span="8">
           <el-button type="primary" icon="Search">搜索</el-button>
         </el-col>
-        <el-col :span="6"></el-col>
       </el-row>
     </div>
-    <div class="info">
-      <h3>基本信息：</h3>
-      <el-table :data="userList" style="width: 100%;margin-top:20px" stripe border>
-        <el-table-column type="selection" width="55" />
-        <el-table-column prop="userId" label="患者编号" width="120" align="center" />
-        <el-table-column prop="userNo" label="患者病历号" width="130" align="center" />
-        <el-table-column prop="username" label="患者姓名" width="120" align="center" />
-        <el-table-column prop="sex" label="性别" width="100" align="center" />
-        <el-table-column prop="userCard" label="身份证号" width="180" align="center" />
-        <el-table-column prop="payType" label="支付方式" width="120" align="center" />
-        <el-table-column label="输入框" width="180" align="center">
-          <el-input v-model="inputtest" placeholder="请输入" clearable />
-        </el-table-column>
-        <el-table-column label="操作" width="100" align="center">
-          <el-button type="danger" size="small" @click="out">退号</el-button>
-        </el-table-column>
-      </el-table>
-      <div style="margin-top: 20px">
-        <el-pagination background layout="prev, pager, next" :total="1000" />
+    <div style="margin-top: 20px;">
+      <h3 class="page-title">基本信息</h3>
+      <div class="el-table-wrapper">
+        <el-table :data="userList" style="width: 100%;margin-top:15px" stripe border>
+          <el-table-column type="selection" width="55" />
+          <el-table-column prop="userId" label="患者编号" min-width="100" align="center" />
+          <el-table-column prop="userNo" label="患者病历号" min-width="120" align="center" />
+          <el-table-column prop="username" label="患者姓名" min-width="100" align="center" />
+          <el-table-column prop="sex" label="性别" min-width="80" align="center" />
+          <el-table-column prop="userCard" label="身份证号" min-width="170" align="center" />
+          <el-table-column prop="payType" label="支付方式" min-width="100" align="center" />
+          <el-table-column label="输入框" width="150" align="center">
+            <template #default>
+              <el-input v-model="inputtest" placeholder="请输入" clearable />
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" width="100" align="center" fixed="right">
+            <template #default>
+              <el-button type="danger" size="small" @click="out">退号</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
+      <el-pagination background layout="prev, pager, next" :total="1000" />
     </div>
-    <!-- 退号对话框 -->
-    <el-dialog v-model="dialogVisible" title="提示" width="500" >
+    <el-dialog v-model="dialogVisible" title="提示" width="500">
       <span>确认取消吗</span>
       <template #footer>
-      <div class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确认 </el-button>
-      </div>
-    </template>
+        <div class="dialog-footer">
+          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button type="primary" @click="dialogVisible = false">确认</el-button>
+        </div>
+      </template>
     </el-dialog>
   </div>
 </template>
@@ -54,7 +55,7 @@
 export default {
   data() {
     return {
-      dialogVisible:"false",//一开始不显示对话框
+      dialogVisible: false,
       no: "",
       username: "",
       inputtest: "",
@@ -112,32 +113,11 @@ export default {
   },
   methods: {
     out() {
-      this.dialogVisible=true
+      this.dialogVisible = true;
     }
   }
 };
 </script>
 
 <style scoped>
-.wrapper {
-  width: 100%;
-  height: 100%;
-}
-.wrapper .link {
-  height: 40px;
-  line-height: 50px;
-  padding-left: 20px;
-  font-size: 18px;
-}
-.wrapper .header {
-  margin-top: 20px;
-  height: 40px;
-}
-.wrapper .info {
-  margin-left: 30px;
-}
-
-.wrapper .registerMessage {
-  margin-left: 30px;
-}
 </style>
