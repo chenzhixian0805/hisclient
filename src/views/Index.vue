@@ -8,7 +8,7 @@
           </el-icon>
           <span v-show="!isCollapsed" class="sidebar-title">东软云医院</span>
           <el-icon v-show="!isCollapsed" class="collapse-icon" @click.stop="toggleCollapse">
-            <DArrowLeft />
+            <ChevronLeft />
           </el-icon>
         </div>
         <el-menu
@@ -63,7 +63,7 @@
           </el-sub-menu>
         </el-menu>
         <div v-show="isCollapsed" class="expand-icon" @click="toggleCollapse">
-          <el-icon><DArrowRight /></el-icon>
+          <el-icon><ChevronRight /></el-icon>
         </div>
       </el-aside>
 
@@ -142,6 +142,10 @@
               <el-icon class="hamburger-icon">
                 <Menu />
               </el-icon>
+            </div>
+            <div class="mobile-logo">
+              <el-icon class="mobile-logo-icon"><OfficeBuilding /></el-icon>
+              <span class="mobile-logo-text">东软云医院</span>
             </div>
             <div class="breadcrumb">
               <span class="breadcrumb-item">首页</span>
@@ -420,6 +424,23 @@ export default {
   color: #4db6ac;
 }
 
+.mobile-logo {
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+
+.mobile-logo-icon {
+  font-size: 20px;
+  color: #4db6ac;
+}
+
+.mobile-logo-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+}
+
 .breadcrumb {
   display: flex;
   align-items: center;
@@ -498,6 +519,14 @@ export default {
 
   .hamburger-btn {
     display: flex;
+  }
+
+  .mobile-logo {
+    display: flex;
+  }
+
+  .breadcrumb {
+    display: none;
   }
 
   .wrapper-header {
