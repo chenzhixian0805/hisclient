@@ -1,18 +1,12 @@
 <template>
   <div class="wrapper">
     <el-container class="main-container">
-      <el-aside :width="isCollapsed ? '60px' : '220px'" class="sidebar" :class="{ 'sidebar-mobile': isMobile }">
-        <div class="sidebar-header" :class="{ collapsed: isCollapsed }">
+      <el-aside width="220px" class="sidebar">
+        <div class="sidebar-header">
           <el-icon class="sidebar-logo">
             <OfficeBuilding />
           </el-icon>
-          <span v-show="!isCollapsed" class="sidebar-title">东软云医院</span>
-          <div class="collapse-btn" @click="toggleCollapse">
-            <el-icon>
-              <ChevronLeft v-if="!isCollapsed" />
-              <ChevronRight v-else />
-            </el-icon>
-          </div>
+          <span class="sidebar-title">东软云医院</span>
         </div>
         <el-menu
           active-text-color="#4db6ac"
@@ -22,8 +16,6 @@
           text-color="#a3b1bf"
           unique-opened
           router
-          :collapse="isCollapsed"
-          @select="onMenuSelect"
         >
           <el-sub-menu index="1">
             <template #title>
@@ -144,13 +136,11 @@
                 <Menu />
               </el-icon>
             </div>
-            <div class="logo-wrapper">
-              <el-icon class="logo-icon">
-                <OfficeBuilding />
-              </el-icon>
-              <h4 class="logo-text">东软云医院</h4>
+            <div class="breadcrumb">
+              <span class="breadcrumb-item">首页</span>
+              <span class="breadcrumb-separator">/</span>
+              <span class="breadcrumb-item active">{{ currentPageName }}</span>
             </div>
-            <span class="version">v1.0</span>
           </div>
           <div class="header-right">
             <span class="user-name">超级管理员</span>
@@ -189,14 +179,18 @@
 export default {
   data() {
     return {
-      isCollapsed: false,
       drawerVisible: false,
       isMobile: false,
+      currentPageName: '',
     };
   },
   mounted() {
     this.checkMobile();
+    this.updatePageName();
     window.addEventListener('resize', this.checkMobile);
+    this.$router.afterEach(() => {
+      this.updatePageName();
+    });
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.checkMobile);
@@ -204,12 +198,6 @@ export default {
   methods: {
     checkMobile() {
       this.isMobile = window.innerWidth <= 768;
-      if (this.isMobile) {
-        this.isCollapsed = true;
-      }
-    },
-    toggleCollapse() {
-      this.isCollapsed = !this.isCollapsed;
     },
     toggleDrawer() {
       this.drawerVisible = !this.drawerVisible;
@@ -217,7 +205,20 @@ export default {
     closeDrawer() {
       this.drawerVisible = false;
     },
-    onMenuSelect() {
+    updatePageName() {
+      const routeMap = {
+        '/home/onsiteRegistration': '窗口挂号',
+        '/home/registrationRecord': '窗口退号',
+        '/home/patientview': '患者查看',
+        '/home/medicalrecord': '病历首页',
+        '/home/prescribemedicine': '开设处方',
+        '/home/pharmacydispensing': '药房发药',
+        '/home/pharmacyinventory': '药房库存',
+        '/home/internalmedicine': '内科',
+        '/home/surgery': '外科',
+        '/home/person': '医院职员',
+      };
+      this.currentPageName = routeMap[this.$route.path] || '';
     },
   },
 };
@@ -239,27 +240,19 @@ export default {
 .sidebar {
   background-color: #1d2b3a;
   position: relative;
-  transition: width 0.3s ease;
-  overflow: hidden;
 }
 
 .sidebar-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 10px;
   padding: 20px 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.3s ease;
-}
-
-.sidebar-header.collapsed {
-  justify-content: center;
 }
 
 .sidebar-logo {
   font-size: 28px;
   color: #4db6ac;
-  flex-shrink: 0;
 }
 
 .sidebar-title {
@@ -270,7 +263,7 @@ export default {
 
 .sidebar-menu {
   border-right: none;
-  min-height: calc(100% - 120px);
+  min-height: calc(100% - 70px);
 }
 
 .sidebar-menu :deep(.el-menu-item.is-active) {
@@ -292,25 +285,6 @@ export default {
 
 .sidebar-menu :deep(.el-sub-menu__title) {
   margin: 0;
-}
-
-.collapse-btn {
-  width: 36px;
-  height: 36px;
-  background-color: rgba(77, 182, 172, 0.15);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #4db6ac;
-  font-size: 18px;
-  transition: all 0.2s;
-  flex-shrink: 0;
-}
-
-.collapse-btn:hover {
-  background-color: rgba(77, 182, 172, 0.25);
 }
 
 .mobile-drawer :deep(.el-drawer__body) {
@@ -358,68 +332,61 @@ export default {
 }
 
 .wrapper-header {
-  background: linear-gradient(135deg, #1d2b3a 0%, #2d4356 100%);
-  height: 60px;
+  background-color: #ffffff;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   z-index: 100;
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .hamburger-btn {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   display: none;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  background-color: rgba(77, 182, 172, 0.1);
   transition: all 0.2s;
 }
 
 .hamburger-btn:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(77, 182, 172, 0.15);
 }
 
 .hamburger-icon {
-  font-size: 28px;
+  font-size: 20px;
   color: #4db6ac;
 }
 
-.logo-wrapper {
+.breadcrumb {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 14px;
 }
 
-.logo-icon {
-  font-size: 24px;
+.breadcrumb-item {
+  color: #606266;
+}
+
+.breadcrumb-item.active {
   color: #4db6ac;
+  font-weight: 500;
 }
 
-.logo-text {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0;
-  letter-spacing: 1px;
-}
-
-.version {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  background-color: rgba(255, 255, 255, 0.08);
-  padding: 2px 8px;
-  border-radius: 10px;
+.breadcrumb-separator {
+  color: #c0c4cc;
 }
 
 .header-right {
@@ -430,7 +397,7 @@ export default {
 
 .user-name {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.85);
+  color: #606266;
 }
 
 .user-dropdown {
@@ -444,26 +411,26 @@ export default {
 }
 
 .user-dropdown:hover {
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
 .user-icon {
   font-size: 18px;
-  color: #4db6ac;
+  color: #909399;
 }
 
 .user-name-text {
   font-size: 14px;
-  color: white;
+  color: #606266;
 }
 
 .arrow-icon {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: #909399;
 }
 
 .main-content {
-  background-color: #f0f2f5;
+  background-color: #f5f7fa;
   padding: 20px;
   overflow-y: auto;
 }
@@ -484,19 +451,11 @@ export default {
 
   .wrapper-header {
     padding: 0 15px;
-    height: 55px;
-  }
-
-  .version {
-    display: none;
+    height: 48px;
   }
 
   .user-name {
     display: none;
-  }
-
-  .logo-text {
-    font-size: 16px;
   }
 
   .main-content {
@@ -507,15 +466,11 @@ export default {
 @media screen and (max-width: 480px) {
   .wrapper-header {
     padding: 0 10px;
-    height: 50px;
+    height: 45px;
   }
 
-  .logo-icon {
-    font-size: 20px;
-  }
-
-  .logo-text {
-    font-size: 14px;
+  .breadcrumb {
+    font-size: 12px;
   }
 
   .main-content {
