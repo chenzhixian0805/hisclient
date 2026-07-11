@@ -7,10 +7,6 @@
             <OfficeBuilding />
           </el-icon>
           <span v-show="!isCollapsed" class="sidebar-title">东软云医院</span>
-          <el-icon class="collapse-icon" @click="toggleCollapse" :title="isCollapsed ? '展开侧边栏' : '折叠侧边栏'">
-            <Fold v-show="!isCollapsed" />
-            <Expand v-show="isCollapsed" />
-          </el-icon>
         </div>
         <el-menu
           active-text-color="#4db6ac"
@@ -144,6 +140,12 @@
             <div class="mobile-logo">
               <el-icon class="mobile-logo-icon"><OfficeBuilding /></el-icon>
               <span class="mobile-logo-text">东软云医院</span>
+            </div>
+            <div class="collapse-btn-header" @click="toggleCollapse" :title="isCollapsed ? '展开侧边栏' : '折叠侧边栏'">
+              <el-icon>
+                <Fold v-show="!isCollapsed" />
+                <Expand v-show="isCollapsed" />
+              </el-icon>
             </div>
             <div class="breadcrumb">
               <span class="breadcrumb-item">首页</span>
@@ -289,25 +291,26 @@ export default {
   flex: 1;
 }
 
-.collapse-icon {
-  font-size: 22px;
-  color: #ffffff;
-  cursor: pointer;
-  flex-shrink: 0;
+.collapse-btn-header {
   width: 34px;
   height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 6px;
-  background-color: rgba(77, 182, 172, 0.3);
-  border: 1px solid rgba(77, 182, 172, 0.5);
+  background-color: #ffffff;
+  border: 1px solid #e4e7ed;
+  color: #4db6ac;
+  font-size: 18px;
+  cursor: pointer;
   transition: all 0.2s;
+  margin-right: 4px;
 }
 
-.collapse-icon:hover {
+.collapse-btn-header:hover {
   background-color: #4db6ac;
   border-color: #4db6ac;
+  color: #ffffff;
 }
 
 .sidebar-menu {
