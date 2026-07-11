@@ -62,8 +62,8 @@
         </el-menu>
         <div class="collapse-btn" @click="toggleCollapse">
           <el-icon>
-            <Fold v-if="!isCollapsed" />
-            <Expand v-else />
+            <ChevronLeft v-if="!isCollapsed" />
+            <ChevronRight v-else />
           </el-icon>
         </div>
       </el-aside>
