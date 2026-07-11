@@ -7,8 +7,9 @@
             <OfficeBuilding />
           </el-icon>
           <span v-show="!isCollapsed" class="sidebar-title">东软云医院</span>
-          <el-icon v-show="!isCollapsed" class="collapse-icon" @click.stop="toggleCollapse">
-            <ChevronLeft />
+          <el-icon class="collapse-icon" @click.stop="toggleCollapse">
+            <ChevronLeft v-show="!isCollapsed" />
+            <ChevronRight v-show="isCollapsed" />
           </el-icon>
         </div>
         <el-menu
@@ -62,9 +63,6 @@
             <el-menu-item index="/home/person">医院职员</el-menu-item>
           </el-sub-menu>
         </el-menu>
-        <div v-show="isCollapsed" class="expand-icon" @click="toggleCollapse">
-          <el-icon><ChevronRight /></el-icon>
-        </div>
       </el-aside>
 
       <el-drawer
@@ -286,34 +284,23 @@ export default {
 }
 
 .collapse-icon {
-  font-size: 18px;
+  font-size: 20px;
   color: #4db6ac;
   cursor: pointer;
   transition: color 0.2s;
   flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s;
 }
 
 .collapse-icon:hover {
   color: #26a69a;
-}
-
-.expand-icon {
-  position: absolute;
-  top: 22px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #4db6ac;
-  font-size: 20px;
-}
-
-.expand-icon:hover {
-  opacity: 0.8;
+  background-color: rgba(77, 182, 172, 0.15);
 }
 
 .sidebar-menu {
