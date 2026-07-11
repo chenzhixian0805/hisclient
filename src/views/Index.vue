@@ -1,59 +1,65 @@
 <template>
-  <!-- 此处编写h5代码 -->
   <div class="wrapper">
-    <el-container>
+    <el-container class="main-container">
       <el-header class="wrapper-header">
         <div class="header-left">
-          <!-- 汉堡菜单按钮 -->
           <el-icon class="hamburger-btn" @click="toggleSidebar">
             <Fold v-if="sidebarVisible" />
             <Expand v-else />
           </el-icon>
-          <h4 class="text-icon">
-            <span style="position: relative;top:4px">
-              <el-icon>
-                <OfficeBuilding />
-              </el-icon>
-            </span>
-            东软云医院
-          </h4>
-          <div class="text">v1.0</div>
+          <div class="logo-wrapper">
+            <el-icon class="logo-icon">
+              <OfficeBuilding />
+            </el-icon>
+            <h4 class="logo-text">东软云医院</h4>
+          </div>
+          <span class="version">v1.0</span>
         </div>
         <div class="header-right">
-          <div class="user-name">超级管理员</div>
-          <div class="user-listwrapper">
-            <el-dropdown :hide-on-click="false">
-              <span class="el-dropdown-link">
-                李四
-                <el-icon class="el-icon--right">
-                  <arrow-down />
-                </el-icon>
-              </span>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item>个人信息</el-dropdown-item>
-                  <el-dropdown-item>设置</el-dropdown-item>
-                  <el-dropdown-item>退出</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-          </div>
+          <span class="user-name">超级管理员</span>
+          <el-dropdown :hide-on-click="false" trigger="click">
+            <div class="user-dropdown">
+              <el-icon class="user-icon">
+                <User />
+              </el-icon>
+              <span class="user-name-text">李四</span>
+              <el-icon class="arrow-icon">
+                <arrow-down />
+              </el-icon>
+            </div>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item>个人信息</el-dropdown-item>
+                <el-dropdown-item>设置</el-dropdown-item>
+                <el-dropdown-item>退出</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
         </div>
       </el-header>
+
       <el-container class="wrapper-main">
-        <!-- 抽屉侧边栏（所有屏幕尺寸共用） -->
         <el-drawer
           v-model="sidebarVisible"
           direction="ltr"
           size="200px"
           :with-header="false"
+          :show-close="false"
+          :modal-append-to-body="false"
+          :close-on-click-modal="true"
         >
+          <div class="drawer-header">
+            <el-icon class="drawer-logo">
+              <OfficeBuilding />
+            </el-icon>
+            <span class="drawer-title">东软云医院</span>
+          </div>
           <el-menu
             active-text-color="#ffd04b"
-            background-color="#545c64"
-            class="el-menu-vertical-demo mobile-menu"
+            background-color="#2f4050"
+            class="sidebar-menu"
             default-active="2"
-            text-color="#fff"
+            text-color="#a7b1c2"
             unique-opened="true"
             router="true"
             @select="onMenuSelect"
@@ -101,43 +107,28 @@
           </el-menu>
         </el-drawer>
 
-        <el-main class="main">
-          <router-view></router-view>
+        <el-main class="main-content">
+          <div class="content-wrapper">
+            <router-view></router-view>
+          </div>
         </el-main>
-
       </el-container>
     </el-container>
   </div>
 </template>
 
 <script>
-// 此处编写js代码
 export default {
   data() {
     return {
-      isMobile: false,
       sidebarVisible: false,
     };
   },
-  mounted() {
-    this.checkScreenSize();
-    window.addEventListener("resize", this.checkScreenSize);
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.checkScreenSize);
-  },
   methods: {
-    checkScreenSize() {
-      this.isMobile = window.innerWidth <= 768;
-      if (!this.isMobile) {
-        this.sidebarVisible = false;
-      }
-    },
     toggleSidebar() {
       this.sidebarVisible = !this.sidebarVisible;
     },
     onMenuSelect() {
-      // 移动端点击菜单项后自动关闭抽屉
       this.sidebarVisible = false;
     },
   },
@@ -145,84 +136,201 @@ export default {
 </script>
 
 <style scoped>
-* {
-  padding: 0px;
-  margin: 0px;
-}
-/* 此处编写css代码 */
 .wrapper {
-  height: 100%;
   width: 100%;
-}
-/*****************头部样式 ***************** */
-.wrapper .wrapper-header {
-  background: #545c64;
-  height: 50px;
-  /* 设置弹性容器 */
+  height: 100%;
   display: flex;
-  /* 水平方向排列方式 */
-  justify-content: space-between;
-  align-items: center;
-  color: white;
+  flex-direction: column;
 }
 
-.wrapper .wrapper-header .header-left {
+.main-container {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper-header {
+  background: linear-gradient(135deg, #545c64 0%, #6b737d 100%);
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+}
+
+.header-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .hamburger-btn {
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
   color: white;
-  display: flex;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
 }
 
-.wrapper .wrapper-header .header-right {
+.hamburger-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.logo-wrapper {
   display: flex;
-  justify-content: right;
   align-items: center;
+  gap: 8px;
 }
-.wrapper .wrapper-header .header-right .el-dropdown-link {
+
+.logo-icon {
+  font-size: 24px;
+  color: #ffd04b;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.version {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-name {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.user-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+
+.user-dropdown:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-icon {
+  font-size: 18px;
+  color: #ffd04b;
+}
+
+.user-name-text {
+  font-size: 14px;
   color: white;
-  font-size: 15px;
-  margin-left: 15px;
-  margin-right: 15px;
 }
 
-/*************** main样式 ****************/
-.wrapper .wrapper-main .aside {
-  height: 800px;
-  background: #545c64;
+.arrow-icon {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-/* 移动端抽屉菜单样式 */
-.mobile-menu {
+.wrapper-main {
+  flex: 1;
+  overflow: hidden;
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 20px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 10px;
+}
+
+.drawer-logo {
+  font-size: 28px;
+  color: #ffd04b;
+}
+
+.drawer-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+}
+
+.sidebar-menu {
   border-right: none;
-  min-height: 100%;
+  min-height: calc(100% - 70px);
 }
 
-/*************** 响应式适配 ****************/
-/* 平板及以下：隐藏非必要信息 */
+.main-content {
+  background-color: #f5f6fa;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.content-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1024px) {
+  .content-wrapper {
+    padding: 0;
+  }
+}
+
 @media screen and (max-width: 768px) {
-  .wrapper .wrapper-header .header-left .text {
+  .wrapper-header {
+    padding: 0 15px;
+    height: 55px;
+  }
+
+  .version {
     display: none;
   }
 
-  .wrapper .wrapper-header .header-right .user-name {
+  .user-name {
     display: none;
   }
 
-  .wrapper .wrapper-header .text-icon {
+  .logo-text {
     font-size: 16px;
   }
+
+  .main-content {
+    padding: 12px;
+  }
 }
 
-/* 手机端进一步优化 */
 @media screen and (max-width: 480px) {
-  .wrapper .wrapper-header .text-icon span {
-    display: none;
+  .wrapper-header {
+    padding: 0 10px;
+    height: 50px;
+  }
+
+  .logo-icon {
+    font-size: 20px;
+  }
+
+  .logo-text {
+    font-size: 14px;
+  }
+
+  .main-content {
+    padding: 8px;
   }
 }
 </style>

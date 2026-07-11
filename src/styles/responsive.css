@@ -1,0 +1,162 @@
+.page-wrapper {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.page-breadcrumb {
+  font-size: 14px;
+  color: #606266;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ebeef5;
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #303133;
+  margin: 0;
+}
+
+.page-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.el-table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.el-table {
+  min-width: 800px;
+}
+
+.el-form--inline .el-form-item {
+  margin-right: 15px;
+}
+
+.el-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .page-wrapper {
+    padding: 15px;
+  }
+  
+  .el-table {
+    min-width: 600px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page-wrapper {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .page-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  
+  .page-actions .el-button {
+    flex: 1;
+    min-width: 100px;
+  }
+  
+  .el-form--inline {
+    flex-direction: column;
+  }
+  
+  .el-form--inline .el-form-item {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .el-form--inline .el-form-item .el-input,
+  .el-form--inline .el-form-item .el-select,
+  .el-form--inline .el-form-item .el-date-picker {
+    width: 100% !important;
+  }
+  
+  .el-table {
+    min-width: 500px;
+    font-size: 12px;
+  }
+  
+  .el-table .el-table__cell {
+    padding: 8px 4px;
+  }
+  
+  .el-pagination {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .el-pagination .btn-prev,
+  .el-pagination .btn-next,
+  .el-pagination .el-pager li {
+    min-width: 32px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .page-wrapper {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .page-breadcrumb {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+  
+  .page-title {
+    font-size: 16px;
+  }
+  
+  .el-table {
+    min-width: 400px;
+    font-size: 11px;
+  }
+  
+  .el-table .el-table__cell {
+    padding: 6px 3px;
+  }
+  
+  .el-table .el-button--small {
+    padding: 3px 6px;
+    font-size: 10px;
+  }
+  
+  .el-dialog {
+    width: 90% !important;
+    margin: 0 5%;
+  }
+}
