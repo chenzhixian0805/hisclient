@@ -295,16 +295,16 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: #4db6ac;
   border: none;
   transition: all 0.2s;
   padding: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(77, 182, 172, 0.6);
 }
 
 .collapse-btn:hover {
-  background-color: #4db6ac;
-  box-shadow: 0 2px 12px rgba(77, 182, 172, 0.5);
+  background-color: #26a69a;
+  box-shadow: 0 2px 12px rgba(77, 182, 172, 0.8);
 }
 
 .collapse-btn:hover .bar {
@@ -322,7 +322,7 @@ export default {
 .bar {
   width: 20px;
   height: 3px;
-  background-color: #1d2b3a;
+  background-color: #ffffff;
   border-radius: 2px;
   transition: all 0.2s;
 }
