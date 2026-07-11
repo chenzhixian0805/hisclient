@@ -7,10 +7,10 @@
             <OfficeBuilding />
           </el-icon>
           <span v-show="!isCollapsed" class="sidebar-title">东软云医院</span>
-          <el-icon class="collapse-icon" @click.stop="toggleCollapse">
-            <ChevronLeft v-show="!isCollapsed" />
-            <ChevronRight v-show="isCollapsed" />
-          </el-icon>
+          <button class="collapse-btn" @click="toggleCollapse" title="折叠侧边栏">
+            <el-icon><ChevronLeft v-show="!isCollapsed" /></el-icon>
+            <el-icon><ChevronRight v-show="isCollapsed" /></el-icon>
+          </button>
         </div>
         <el-menu
           active-text-color="#4db6ac"
@@ -283,26 +283,31 @@ export default {
   flex: 1;
 }
 
-.collapse-icon {
+.collapse-btn {
   font-size: 24px;
   color: #4db6ac;
   cursor: pointer;
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  background-color: rgba(77, 182, 172, 0.15);
-  border: 1px solid rgba(77, 182, 172, 0.3);
+  border-radius: 50%;
+  background-color: rgba(77, 182, 172, 0.2);
+  border: 2px solid #4db6ac;
   transition: all 0.2s;
+  padding: 0;
 }
 
-.collapse-icon:hover {
+.collapse-btn:hover {
   color: #ffffff;
   background-color: #4db6ac;
-  border-color: #4db6ac;
+  transform: scale(1.1);
+}
+
+.collapse-btn:active {
+  transform: scale(0.95);
 }
 
 .sidebar-menu {
