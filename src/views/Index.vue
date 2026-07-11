@@ -8,8 +8,7 @@
           </el-icon>
           <span v-show="!isCollapsed" class="sidebar-title">东软云医院</span>
           <button class="collapse-btn" @click="toggleCollapse" title="折叠侧边栏">
-            <el-icon><ChevronLeft v-show="!isCollapsed" /></el-icon>
-            <el-icon><ChevronRight v-show="isCollapsed" /></el-icon>
+            <span class="collapse-text">{{ isCollapsed ? '展开' : '折叠' }}</span>
           </button>
         </div>
         <el-menu
@@ -284,30 +283,33 @@ export default {
 }
 
 .collapse-btn {
-  font-size: 24px;
+  font-size: 14px;
   color: #4db6ac;
   cursor: pointer;
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  height: 36px;
+  padding: 0 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background-color: rgba(77, 182, 172, 0.2);
-  border: 2px solid #4db6ac;
+  border-radius: 6px;
+  background-color: rgba(77, 182, 172, 0.15);
+  border: 1px solid #4db6ac;
   transition: all 0.2s;
-  padding: 0;
+  font-weight: 600;
 }
 
 .collapse-btn:hover {
   color: #ffffff;
   background-color: #4db6ac;
-  transform: scale(1.1);
 }
 
 .collapse-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.98);
+}
+
+.collapse-text {
+  white-space: nowrap;
 }
 
 .sidebar-menu {
