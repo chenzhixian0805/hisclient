@@ -287,14 +287,14 @@ export default {
 
 .collapse-icon {
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #4db6ac;
   cursor: pointer;
   transition: color 0.2s;
   flex-shrink: 0;
 }
 
 .collapse-icon:hover {
-  color: #4db6ac;
+  color: #26a69a;
 }
 
 .expand-icon {
@@ -342,6 +342,10 @@ export default {
   margin: 0;
 }
 
+.mobile-drawer :deep(.el-drawer__wrapper) {
+  background-color: #1d2b3a;
+}
+
 .mobile-drawer :deep(.el-drawer__body) {
   padding: 0;
   background-color: #1d2b3a;
@@ -353,6 +357,7 @@ export default {
   gap: 12px;
   padding: 24px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #1d2b3a !important;
 }
 
 .drawer-logo {
@@ -363,7 +368,7 @@ export default {
 .drawer-title {
   font-size: 18px;
   font-weight: 600;
-  color: white;
+  color: #ffffff !important;
 }
 
 .drawer-menu {
