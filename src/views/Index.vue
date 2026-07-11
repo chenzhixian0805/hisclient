@@ -3,17 +3,14 @@
     <el-container class="main-container">
       <el-aside :width="isCollapsed ? '60px' : '220px'" class="sidebar">
         <div class="sidebar-header" :class="{ collapsed: isCollapsed }">
-          <el-icon class="sidebar-logo">
+          <el-icon class="sidebar-logo" @click="toggleCollapse" :title="isCollapsed ? '展开侧边栏' : ''">
             <OfficeBuilding />
           </el-icon>
           <span v-show="!isCollapsed" class="sidebar-title">东软云医院</span>
-          <button class="collapse-btn" @click="toggleCollapse" title="折叠侧边栏">
-            <div class="hamburger-icon">
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
-            </div>
-          </button>
+          <el-icon class="collapse-icon" @click="toggleCollapse" title="折叠侧边栏">
+            <ChevronLeft v-show="!isCollapsed" />
+            <ChevronRight v-show="isCollapsed" />
+          </el-icon>
         </div>
         <el-menu
           active-text-color="#4db6ac"
@@ -277,6 +274,12 @@ export default {
   font-size: 28px;
   color: #4db6ac;
   flex-shrink: 0;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.sidebar-logo:hover {
+  opacity: 0.8;
 }
 
 .sidebar-title {
@@ -286,45 +289,22 @@ export default {
   flex: 1;
 }
 
-.collapse-btn {
+.collapse-icon {
+  font-size: 20px;
+  color: #4db6ac;
   cursor: pointer;
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  background-color: #4db6ac;
-  border: none;
+  border-radius: 6px;
   transition: all 0.2s;
-  padding: 0;
-  box-shadow: 0 2px 8px rgba(77, 182, 172, 0.6);
 }
 
-.collapse-btn:hover {
-  background-color: #26a69a;
-  box-shadow: 0 2px 12px rgba(77, 182, 172, 0.8);
-}
-
-.collapse-btn:hover .bar {
-  background-color: #ffffff;
-}
-
-.hamburger-icon {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  align-items: center;
-  justify-content: center;
-}
-
-.bar {
-  width: 20px;
-  height: 3px;
-  background-color: #ffffff;
-  border-radius: 2px;
-  transition: all 0.2s;
+.collapse-icon:hover {
+  background-color: rgba(77, 182, 172, 0.15);
 }
 
 .sidebar-menu {
