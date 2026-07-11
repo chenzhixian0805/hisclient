@@ -261,13 +261,13 @@ export default {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 20px 15px;
+  padding: 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.3s ease;
 }
 
 .sidebar-header.collapsed {
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .sidebar-logo {
@@ -284,23 +284,25 @@ export default {
 }
 
 .collapse-icon {
-  font-size: 20px;
+  font-size: 24px;
   color: #4db6ac;
   cursor: pointer;
-  transition: color 0.2s;
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 8px;
+  background-color: rgba(77, 182, 172, 0.15);
+  border: 1px solid rgba(77, 182, 172, 0.3);
   transition: all 0.2s;
 }
 
 .collapse-icon:hover {
-  color: #26a69a;
-  background-color: rgba(77, 182, 172, 0.15);
+  color: #ffffff;
+  background-color: #4db6ac;
+  border-color: #4db6ac;
 }
 
 .sidebar-menu {
