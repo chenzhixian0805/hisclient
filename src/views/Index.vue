@@ -7,9 +7,9 @@
             <OfficeBuilding />
           </el-icon>
           <span v-show="!isCollapsed" class="sidebar-title">东软云医院</span>
-          <el-icon class="collapse-icon" @click="toggleCollapse" title="折叠侧边栏">
-            <ChevronLeft v-show="!isCollapsed" />
-            <ChevronRight v-show="isCollapsed" />
+          <el-icon class="collapse-icon" @click="toggleCollapse" :title="isCollapsed ? '展开侧边栏' : '折叠侧边栏'">
+            <Fold v-show="!isCollapsed" />
+            <Expand v-show="isCollapsed" />
           </el-icon>
         </div>
         <el-menu
@@ -290,21 +290,24 @@ export default {
 }
 
 .collapse-icon {
-  font-size: 20px;
-  color: #4db6ac;
+  font-size: 22px;
+  color: #ffffff;
   cursor: pointer;
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 6px;
+  background-color: rgba(77, 182, 172, 0.3);
+  border: 1px solid rgba(77, 182, 172, 0.5);
   transition: all 0.2s;
 }
 
 .collapse-icon:hover {
-  background-color: rgba(77, 182, 172, 0.15);
+  background-color: #4db6ac;
+  border-color: #4db6ac;
 }
 
 .sidebar-menu {
