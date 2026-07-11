@@ -1,110 +1,106 @@
 <template>
   <div class="wrapper">
     <el-container class="main-container">
-      <el-header class="wrapper-header">
-        <div class="header-left">
-          <el-icon class="hamburger-btn" @click="toggleSidebar">
-            <Fold v-if="sidebarVisible" />
+      <el-aside :width="isCollapsed ? '60px' : '220px'" class="sidebar">
+        <div class="sidebar-header" :class="{ collapsed: isCollapsed }">
+          <el-icon class="sidebar-logo">
+            <OfficeBuilding />
+          </el-icon>
+          <span v-show="!isCollapsed" class="sidebar-title">东软云医院</span>
+        </div>
+        <el-menu
+          active-text-color="#4db6ac"
+          background-color="#1d2b3a"
+          class="sidebar-menu"
+          default-active="2"
+          text-color="#a3b1bf"
+          unique-opened
+          router
+          :collapse="isCollapsed"
+          @select="onMenuSelect"
+        >
+          <el-sub-menu index="1">
+            <template #title>
+              <el-icon><HelpFilled /></el-icon>
+              <span>挂号收费</span>
+            </template>
+            <el-menu-item index="/home/onsiteRegistration">窗口挂号</el-menu-item>
+            <el-menu-item index="/home/registrationRecord">窗口退号</el-menu-item>
+          </el-sub-menu>
+          <el-sub-menu index="2">
+            <template #title>
+              <el-icon><Avatar /></el-icon>
+              <span>门诊医生</span>
+            </template>
+            <el-menu-item index="/home/patientview">患者查看</el-menu-item>
+            <el-menu-item index="/home/medicalrecord">医生诊疗:病历首页</el-menu-item>
+            <el-menu-item index="/home/prescribemedicine">医生诊疗:开设处方</el-menu-item>
+          </el-sub-menu>
+          <el-sub-menu index="3">
+            <template #title>
+              <el-icon><FirstAidKit /></el-icon>
+              <span>药房管理</span>
+            </template>
+            <el-menu-item index="/home/pharmacydispensing">药房发药</el-menu-item>
+            <el-menu-item index="/home/pharmacyinventory">药房库存</el-menu-item>
+          </el-sub-menu>
+          <el-sub-menu index="4">
+            <template #title>
+              <el-icon><House /></el-icon>
+              <span>医院科室</span>
+            </template>
+            <el-menu-item index="/home/internalmedicine">内科</el-menu-item>
+            <el-menu-item index="/home/surgery">外科</el-menu-item>
+          </el-sub-menu>
+          <el-sub-menu index="5">
+            <template #title>
+              <el-icon><UserFilled /></el-icon>
+              <span>人员管理</span>
+            </template>
+            <el-menu-item index="/home/person">医院职员</el-menu-item>
+          </el-sub-menu>
+        </el-menu>
+        <div class="collapse-btn" @click="toggleCollapse">
+          <el-icon>
+            <Fold v-if="!isCollapsed" />
             <Expand v-else />
           </el-icon>
-          <div class="logo-wrapper">
-            <el-icon class="logo-icon">
-              <OfficeBuilding />
-            </el-icon>
-            <h4 class="logo-text">东软云医院</h4>
-          </div>
-          <span class="version">v1.0</span>
         </div>
-        <div class="header-right">
-          <span class="user-name">超级管理员</span>
-          <el-dropdown :hide-on-click="false" trigger="click">
-            <div class="user-dropdown">
-              <el-icon class="user-icon">
-                <User />
-              </el-icon>
-              <span class="user-name-text">李四</span>
-              <el-icon class="arrow-icon">
-                <arrow-down />
-              </el-icon>
-            </div>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item>个人信息</el-dropdown-item>
-                <el-dropdown-item>设置</el-dropdown-item>
-                <el-dropdown-item>退出</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </div>
-      </el-header>
+      </el-aside>
 
-      <el-container class="wrapper-main">
-        <el-drawer
-          v-model="sidebarVisible"
-          direction="ltr"
-          size="220px"
-          :with-header="false"
-          :show-close="false"
-          :close-on-click-modal="true"
-        >
-          <div class="drawer-header">
-            <el-icon class="drawer-logo">
-              <OfficeBuilding />
-            </el-icon>
-            <span class="drawer-title">东软云医院</span>
+      <el-container class="wrapper-right">
+        <el-header class="wrapper-header">
+          <div class="header-left">
+            <div class="logo-wrapper">
+              <el-icon class="logo-icon">
+                <OfficeBuilding />
+              </el-icon>
+              <h4 class="logo-text">东软云医院</h4>
+            </div>
+            <span class="version">v1.0</span>
           </div>
-          <el-menu
-            active-text-color="#ffffff"
-            background-color="#1d2b3a"
-            class="sidebar-menu"
-            default-active="2"
-            text-color="#a3b1bf"
-            unique-opened="true"
-            router="true"
-            @select="onMenuSelect"
-          >
-            <el-sub-menu index="1">
-              <template #title>
-                <el-icon><HelpFilled /></el-icon>
-                <span>挂号收费</span>
+          <div class="header-right">
+            <span class="user-name">超级管理员</span>
+            <el-dropdown :hide-on-click="false" trigger="click">
+              <div class="user-dropdown">
+                <el-icon class="user-icon">
+                  <User />
+                </el-icon>
+                <span class="user-name-text">李四</span>
+                <el-icon class="arrow-icon">
+                  <arrow-down />
+                </el-icon>
+              </div>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item>个人信息</el-dropdown-item>
+                  <el-dropdown-item>设置</el-dropdown-item>
+                  <el-dropdown-item>退出</el-dropdown-item>
+                </el-dropdown-menu>
               </template>
-              <el-menu-item index="/home/onsiteRegistration">窗口挂号</el-menu-item>
-              <el-menu-item index="/home/registrationRecord">窗口退号</el-menu-item>
-            </el-sub-menu>
-            <el-sub-menu index="2">
-              <template #title>
-                <el-icon><Avatar /></el-icon>
-                <span>门诊医生</span>
-              </template>
-              <el-menu-item index="/home/patientview">患者查看</el-menu-item>
-              <el-menu-item index="/home/medicalrecord">医生诊疗:病历首页</el-menu-item>
-              <el-menu-item index="/home/prescribemedicine">医生诊疗:开设处方</el-menu-item>
-            </el-sub-menu>
-            <el-sub-menu index="3">
-              <template #title>
-                <el-icon><FirstAidKit /></el-icon>
-                <span>药房管理</span>
-              </template>
-              <el-menu-item index="/home/pharmacydispensing">药房发药</el-menu-item>
-              <el-menu-item index="/home/pharmacyinventory">药房库存</el-menu-item>
-            </el-sub-menu>
-            <el-sub-menu index="4">
-              <template #title>
-                <el-icon><House /></el-icon>
-                <span>医院科室</span>
-              </template>
-              <el-menu-item index="/home/internalmedicine">内科</el-menu-item>
-              <el-menu-item index="/home/surgery">外科</el-menu-item>
-            </el-sub-menu>
-            <el-sub-menu index="5">
-              <template #title>
-                <el-icon><UserFilled /></el-icon>
-                <span>人员管理</span>
-              </template>
-              <el-menu-item index="/home/person">医院职员</el-menu-item>
-            </el-sub-menu>
-          </el-menu>
-        </el-drawer>
+            </el-dropdown>
+          </div>
+        </el-header>
 
         <el-main class="main-content">
           <div class="content-wrapper">
@@ -120,15 +116,14 @@
 export default {
   data() {
     return {
-      sidebarVisible: false,
+      isCollapsed: false,
     };
   },
   methods: {
-    toggleSidebar() {
-      this.sidebarVisible = !this.sidebarVisible;
+    toggleCollapse() {
+      this.isCollapsed = !this.isCollapsed;
     },
     onMenuSelect() {
-      this.sidebarVisible = false;
     },
   },
 };
@@ -147,6 +142,92 @@ export default {
   height: 100%;
 }
 
+.sidebar {
+  background-color: #1d2b3a;
+  position: relative;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.sidebar-header.collapsed {
+  justify-content: center;
+}
+
+.sidebar-logo {
+  font-size: 28px;
+  color: #4db6ac;
+  flex-shrink: 0;
+}
+
+.sidebar-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+}
+
+.sidebar-menu {
+  border-right: none;
+  min-height: calc(100% - 120px);
+}
+
+.sidebar-menu :deep(.el-menu-item.is-active) {
+  background-color: rgba(77, 182, 172, 0.15) !important;
+  color: #4db6ac !important;
+}
+
+.sidebar-menu :deep(.el-menu-item:hover) {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.sidebar-menu :deep(.el-sub-menu__title:hover) {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.sidebar-menu :deep(.el-menu-item) {
+  margin: 0;
+}
+
+.sidebar-menu :deep(.el-sub-menu__title) {
+  margin: 0;
+}
+
+.collapse-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: rgba(77, 182, 172, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #4db6ac;
+  font-size: 18px;
+  transition: background-color 0.2s;
+}
+
+.collapse-btn:hover {
+  background-color: rgba(77, 182, 172, 0.3);
+}
+
+.wrapper-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .wrapper-header {
   background: linear-gradient(135deg, #1d2b3a 0%, #2d4356 100%);
   height: 60px;
@@ -163,19 +244,6 @@ export default {
   display: flex;
   align-items: center;
   gap: 12px;
-}
-
-.hamburger-btn {
-  font-size: 22px;
-  cursor: pointer;
-  color: white;
-  padding: 8px;
-  border-radius: 6px;
-  transition: background-color 0.2s;
-}
-
-.hamburger-btn:hover {
-  background-color: rgba(255, 255, 255, 0.12);
 }
 
 .logo-wrapper {
@@ -242,50 +310,6 @@ export default {
 .arrow-icon {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.6);
-}
-
-.wrapper-main {
-  flex: 1;
-  overflow: hidden;
-}
-
-.drawer-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 20px 20px 15px;
-  background-color: #1d2b3a;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 0;
-}
-
-.drawer-logo {
-  font-size: 28px;
-  color: #4db6ac;
-}
-
-.drawer-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: white;
-}
-
-.sidebar-menu {
-  border-right: none;
-  min-height: calc(100% - 70px);
-}
-
-.sidebar-menu :deep(.el-menu-item.is-active) {
-  background-color: #2d4356 !important;
-  color: #ffffff !important;
-}
-
-.sidebar-menu :deep(.el-menu-item:hover) {
-  background-color: #2d4356 !important;
-}
-
-.sidebar-menu :deep(.el-sub-menu__title:hover) {
-  background-color: #2d4356 !important;
 }
 
 .main-content {
