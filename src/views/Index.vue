@@ -1,12 +1,15 @@
 <template>
   <div class="wrapper">
     <el-container class="main-container">
-      <el-aside width="220px" class="sidebar">
-        <div class="sidebar-header">
+      <el-aside :width="isCollapsed ? '60px' : '220px'" class="sidebar">
+        <div class="sidebar-header" :class="{ collapsed: isCollapsed }">
           <el-icon class="sidebar-logo">
             <OfficeBuilding />
           </el-icon>
-          <span class="sidebar-title">东软云医院</span>
+          <span v-show="!isCollapsed" class="sidebar-title">东软云医院</span>
+          <el-icon v-show="!isCollapsed" class="collapse-icon" @click.stop="toggleCollapse">
+            <DArrowLeft />
+          </el-icon>
         </div>
         <el-menu
           active-text-color="#4db6ac"
@@ -16,6 +19,7 @@
           text-color="#a3b1bf"
           unique-opened
           router
+          :collapse="isCollapsed"
         >
           <el-sub-menu index="1">
             <template #title>
@@ -58,6 +62,9 @@
             <el-menu-item index="/home/person">医院职员</el-menu-item>
           </el-sub-menu>
         </el-menu>
+        <div v-show="isCollapsed" class="expand-icon" @click="toggleCollapse">
+          <el-icon><DArrowRight /></el-icon>
+        </div>
       </el-aside>
 
       <el-drawer
@@ -181,6 +188,7 @@ export default {
     return {
       drawerVisible: false,
       isMobile: false,
+      isCollapsed: false,
       currentPageName: '',
     };
   },
@@ -201,6 +209,9 @@ export default {
     },
     toggleDrawer() {
       this.drawerVisible = !this.drawerVisible;
+    },
+    toggleCollapse() {
+      this.isCollapsed = !this.isCollapsed;
     },
     closeDrawer() {
       this.drawerVisible = false;
@@ -240,6 +251,8 @@ export default {
 .sidebar {
   background-color: #1d2b3a;
   position: relative;
+  transition: width 0.3s ease;
+  overflow: hidden;
 }
 
 .sidebar-header {
@@ -248,17 +261,55 @@ export default {
   gap: 10px;
   padding: 20px 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.sidebar-header.collapsed {
+  justify-content: center;
 }
 
 .sidebar-logo {
   font-size: 28px;
   color: #4db6ac;
+  flex-shrink: 0;
 }
 
 .sidebar-title {
   font-size: 16px;
   font-weight: 600;
   color: white;
+  flex: 1;
+}
+
+.collapse-icon {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+
+.collapse-icon:hover {
+  color: #4db6ac;
+}
+
+.expand-icon {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #4db6ac;
+  font-size: 20px;
+}
+
+.expand-icon:hover {
+  opacity: 0.8;
 }
 
 .sidebar-menu {
