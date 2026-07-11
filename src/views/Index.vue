@@ -527,6 +527,10 @@ export default {
     display: flex;
   }
 
+  .collapse-btn-header {
+    display: none;
+  }
+
   .breadcrumb {
     display: none;
   }
