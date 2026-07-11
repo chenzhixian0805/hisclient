@@ -7,6 +7,12 @@
             <OfficeBuilding />
           </el-icon>
           <span v-show="!isCollapsed" class="sidebar-title">东软云医院</span>
+          <div class="collapse-btn" @click="toggleCollapse">
+            <el-icon>
+              <ChevronLeft v-if="!isCollapsed" />
+              <ChevronRight v-else />
+            </el-icon>
+          </div>
         </div>
         <el-menu
           active-text-color="#4db6ac"
@@ -60,12 +66,6 @@
             <el-menu-item index="/home/person">医院职员</el-menu-item>
           </el-sub-menu>
         </el-menu>
-        <div class="collapse-btn" @click="toggleCollapse">
-          <el-icon>
-            <ChevronLeft v-if="!isCollapsed" />
-            <ChevronRight v-else />
-          </el-icon>
-        </div>
       </el-aside>
 
       <el-drawer
@@ -246,7 +246,7 @@ export default {
 .sidebar-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
   padding: 20px 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.3s ease;
@@ -295,25 +295,22 @@ export default {
 }
 
 .collapse-btn {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 40px;
-  background-color: rgba(77, 182, 172, 0.2);
-  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(77, 182, 172, 0.15);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: #4db6ac;
   font-size: 18px;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  flex-shrink: 0;
 }
 
 .collapse-btn:hover {
-  background-color: rgba(77, 182, 172, 0.3);
+  background-color: rgba(77, 182, 172, 0.25);
 }
 
 .mobile-drawer :deep(.el-drawer__body) {
